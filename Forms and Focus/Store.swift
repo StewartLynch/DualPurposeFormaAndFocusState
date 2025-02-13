@@ -9,8 +9,9 @@
 
 import Foundation
 
-class Store: ObservableObject {
-    @Published var contacts: [Contact] = []
+@Observable
+class Store {
+    var contacts: [Contact] = []
     var preview: Bool
     init(preview: Bool = false) {
         self.preview = preview
@@ -20,7 +21,7 @@ class Store: ObservableObject {
             loadContacts()
         }
     }
-
+    
     // MARK: - CRUD Functions
     // CREATE
     func create(_ newContact: Contact) {
@@ -42,13 +43,13 @@ class Store: ObservableObject {
         contacts[index] = contact
         saveContacts()
     }
-
+    
     // DELETE
     func delete(at indexSet: IndexSet) {
         contacts.remove(atOffsets: indexSet)
         saveContacts()
     }
-
+    
     // SAVE
     func saveContacts() {
         if preview { return }

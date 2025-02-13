@@ -10,16 +10,16 @@
 import SwiftUI
 
 struct ContactsListView: View {
-    @EnvironmentObject var store: Store
+    @Environment(Store.self) var store
     @State private var formType: FormType?
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(store.contacts) { contact in
                     HStack(alignment: .center) {
                         Image(systemName: "person.fill")
                             .font(.largeTitle)
-                            .foregroundColor(.accentColor)
+                            .foregroundStyle(.tint)
                         VStack(alignment: .leading) {
                             Text("\(contact.firstName) \(contact.lastName)")
                                 .font(.title)
@@ -39,24 +39,19 @@ struct ContactsListView: View {
             .navigationTitle("Contacts")
             .listStyle(.plain)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        formType = .new
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.title3)
-                    }
+                Button {
+                    formType = .new
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.title3)
                 }
             }
             .sheet(item: $formType) { $0 }
         }
-        .navigationViewStyle(.stack)
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContactsListView()
-            .environmentObject(Store(preview: true))
-    }
+#Preview {
+    ContactsListView()
+        .environment(Store(preview: true))
 }

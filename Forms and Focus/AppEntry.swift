@@ -11,11 +11,11 @@ import SwiftUI
 
 @main
 struct AppEntry: App {
-    @StateObject var store = Store()
+    @State var store = Store()
     var body: some Scene {
         WindowGroup {
             ContactsListView()
-                .environmentObject(store)
+                .environment(store)
         }
     }
 }

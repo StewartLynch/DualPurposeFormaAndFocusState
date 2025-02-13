@@ -10,12 +10,12 @@
 import SwiftUI
 
 struct FormView: View {
-    @EnvironmentObject var store: Store
+    @Environment(Store.self) var store
     @Environment(\.dismiss) var dismiss
-    @StateObject var viewModel: FormViewModel
+    @State var viewModel: FormViewModel
     @FocusState private var focus: AnyKeyPath?
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 TextField("First Name", text: $viewModel.firstName, onCommit: nextFocus)
                     .focused($focus, equals: \FormViewModel.firstName)
@@ -54,7 +54,6 @@ struct FormView: View {
         }
         .task {
             if !viewModel.updating {
-                try? await Task.sleep(nanoseconds: 500_000_000)
                 focus = \FormViewModel.firstName
             }
         }
@@ -62,14 +61,14 @@ struct FormView: View {
     
     func nextFocus() {
         switch focus {
-        case \FormViewModel.firstName:
-            focus = \FormViewModel.lastName
-        case \FormViewModel.lastName:
-            focus = \FormViewModel.email
-        case \FormViewModel.email:
-            focus = \FormViewModel.firstName
-        default:
-            break
+            case \FormViewModel.firstName:
+                focus = \FormViewModel.lastName
+            case \FormViewModel.lastName:
+                focus = \FormViewModel.email
+            case \FormViewModel.email:
+                focus = \FormViewModel.firstName
+            default:
+                break
         }
     }
     
@@ -91,9 +90,7 @@ struct FormView: View {
     }
 }
 
-struct FormView_Previews: PreviewProvider {
-    static var previews: some View {
-        FormView(viewModel: FormViewModel())
-            .environmentObject(Store())
-    }
+#Preview {
+    FormView(viewModel: FormViewModel())
+        .environment(Store())
 }

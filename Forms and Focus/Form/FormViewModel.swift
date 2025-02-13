@@ -9,10 +9,11 @@
 
 import Foundation
 
-class FormViewModel: ObservableObject {
-    @Published var firstName = ""
-    @Published var lastName = ""
-    @Published var email = ""
+@Observable
+class FormViewModel {
+    var firstName = ""
+    var lastName = ""
+    var email = ""
     
     var id: String?
     
