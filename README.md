@@ -2,6 +2,10 @@
 
 This is the completed Project for the YouTube video of the same name
 
+**NOTE:** 
+
+A new branch has been added where the completed source code has been updated to iOS 18
+
 The starter project and video is available in the notes for the video.
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=VEHn4WanW5g
