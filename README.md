@@ -1,6 +1,6 @@
 # Dual Purpose Form and FocusState
 
-This is the completed Project for the YouTube video of the same name
+This is the Updated version of the code that has been updated to iOS 18
 
 The starter project and video is available in the notes for the video.
 
